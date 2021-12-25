@@ -10,23 +10,14 @@ N.times do |i|
   A[i] = w[1..-1]
 end
 
-pp N,X 
-pp L
-pp A
-
-
 cnt = 0
-remain = X
-N.times do |i|
-  A[i].each do |ball|
-    d,m = remain.divmod(ball)
-    if m == 0 then
-      remain = d
-    end
-    STDERR.puts "[#{i}] #{ball} : #{d} #{m}"
+combi =  A[0].product(*A[1..-1])
+
+combi.each do |c|
+  w = c.inject(1) do |prod,i|
+    prod *= i 
   end
-  if remain == 1 then
-    cnt += 1
-  end
+  cnt += 1 if w == X 
 end
 puts cnt
+
